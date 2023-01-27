@@ -5,12 +5,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 32
+    //noinspection GradleCompatible
+    compileSdkVersion 33
     defaultConfig {
         multiDexEnabled false
         applicationId "com.sunnyweather.android"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -28,8 +29,8 @@ dependencies {
     //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 //   implementation 'com.android.support:multidex:2.0.1'
 //    implementation 'com.android.support:multidex:1.0.3'
-    implementation 'androidx.appcompat:appcompat:1.5.0'
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.5.2'
@@ -37,7 +38,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
-   // implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
      //implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0-alpha04"
    // implementation "androidx.work:work-runtime:2.7.1"
     implementation 'com.google.android.material:material:1.7.0'

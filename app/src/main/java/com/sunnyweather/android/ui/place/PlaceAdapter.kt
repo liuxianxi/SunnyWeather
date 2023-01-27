@@ -1,16 +1,19 @@
 package com.sunnyweather.android.ui.place
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.sunnyweather.android.R
 import com.sunnyweather.android.logic.model.Place
+import com.sunnyweather.android.ui.weather.WeatherActivity
+
+
 
 //FruitAdapter中也有一个主构造函数,把要展示的数据源传进来
-class PlaceAdapter(private val fragment: Fragment, private val placeList: List<Place>) :
+class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: List<Place>) :
 RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
 
     //一个内部类ViewHolder，它要继承自
@@ -24,12 +27,29 @@ RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
     }
 
 //onCreateViewHolder()方法是用于创建ViewHolder实例的，我们在这个方法中将
-//fruit_item布局加载进来，然后创建一个ViewHolder实例，并把加载出来的布局传入构造
+//place_item布局加载进来，然后创建一个ViewHolder实例，并把加载出来的布局传入构造
 //函数当中，最后将ViewHolder的实例返回。
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context ).inflate(R.layout.place_item,
+override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    val view = LayoutInflater.from(parent.context).inflate(R.layout.place_item,
         parent, false)
-        return ViewHolder(view)
+    val holder = ViewHolder(view)
+    holder.itemView.setOnClickListener {
+        val position = holder.adapterPosition
+        val place = placeList[position]
+        val intent = Intent(parent.context, WeatherActivity::class.java).apply {
+            putExtra("location_lng", place.location.lng)
+            putExtra("location_lat", place.location.lat)
+            putExtra("place_name", place.name)
+        }
+        //在onCreateViewHolder()方法中，当点击了任何子项布局时，在跳转到
+        //WeatherActivity之前，先调用PlaceViewModel的savePlace()方法来存储选中的城市
+        fragment.viewModel.savePlace(place)
+        fragment.startActivity(intent)
+        fragment.activity?.finish()
+
+    }
+       // return ViewHolder(view)
+    return holder
     }
 
     //onBindViewHolder()方法用于对

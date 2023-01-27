@@ -29,4 +29,10 @@ class PlaceViewModel : ViewModel() {
     //switchMap()方法所对应的转换函数就会执行。然后在转换函数中，我们只需要调用仓库层中
     //定义的searchPlaces()方法就可以发起网络请求，同时将仓库层返回的LiveData对象转换成
     //一个可供Activity观察的LiveData对象。
+
+    fun savePlace(place: Place) = Repository.savePlace(place)
+
+    fun getSavePlace() = Repository.getSavedPlace()
+
+    fun isPlaceSaved() = Repository.isPlaceSaved()
 }
